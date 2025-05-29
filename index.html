@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Send Data to Server</title>
+  </head>
+  <body>
+    <label>
+      Name:
+      <input type="text" class="name" /> </label
+    ><br />
+
+    <label>
+      Email:
+      <input type="text" class="email" /> </label
+    ><br />
+
+    <button id="submit">Submit</button>
+
+    <script>
+      const nameInput = document.querySelector(".name");
+      const emailInput = document.querySelector(".email");
+      const submitBtn = document.getElementById("submit");
+
+      submitBtn.addEventListener("click", async () => {
+        const name = nameInput.value;
+        const email = emailInput.value;
+
+        const request = new Request(  'http://localhost:4000/submit' , {
+headers:{'Content-Type': 'application/json'}, 
+body: JSON.stringify({name,email}) , 
+method:'POST'
+        })
+
+
+        const response = await fetch(request);
+        const result = await response.json();
+        console.log("Server Response:", result);
+      });
+    </script>
+  </body>
+</html>
