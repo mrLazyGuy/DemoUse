@@ -7,7 +7,7 @@ res.send(books)
 })
 
 
-router.post('/',(req,res)=>{
+router.post('/',(req)=>{
 const data = req.body
 books.push(data)
 

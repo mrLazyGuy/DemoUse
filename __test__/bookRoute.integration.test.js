@@ -6,11 +6,20 @@ const app = require("../app");
 describe("integration for the books api", () => {
   test("GET /api/books - Success - get all the books", async () => {
     const res = await request(app).get("/api/books");
+    expect(res.body).toEqual([
+      { name: expect, author: "jkRollings" },
+      { name: "syllemon", author: "kishor" },
+      { name: "hikings", author: "mausam" },
 
-    console.log(res.body);
-    expect.assertions(1);
+    ]);
     expect(res.statusCode).toBe(200);
   });
+  //post
+
+
+  //update
+
+  //delete
 });
 
 console.log("hello");
