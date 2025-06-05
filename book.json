@@ -1,8 +1,30 @@
 [
-
-{"name": "harryPotter", "author": "jkRollings" }, 
-{"name": "syllemon", "author": "kishor" }, 
-{"name": "hikings", "author": "mausam" } 
-
-
+    {
+        "name": "putterhairy",
+        "author": "jkRollings"
+    },
+    {
+        "name": "syllemon",
+        "author": "kishor"
+    },
+    {
+        "name": "hikings",
+        "author": "mausam"
+    },
+    {
+        "name": "The Silent Patient",
+        "author": "Alex Michaelides"
+    },
+    {
+        "name": "good man",
+        "author": "mainaly"
+    },
+    {
+        "name": "hero x hero ",
+        "author": "tomatoEater"
+    },
+    {
+        "name": "dog is man best friend  ",
+        "author": "mr.factSpitter"
+    }
 ]

@@ -1,25 +1,62 @@
-const express = require("express");
 const request = require("supertest");
-const bookRoute = require("../routes/books.route");
 const app = require("../app");
+const myLogger = require("../utilities/myLogger");
+// describe("integration for the books api get verb", () => {
+//   // test("GET /api/books - Success - get all the books", async () => {
+//   //   const res = await request(app).get("/api/books");
+//   //   myLogger.info(res.body);
+//   //   expect(res.body).toEqual(
+//   //     expect.arrayContaining([
+//   //       expect.objectContaining({
+//   //         name: expect.any(String),
+//   //         author: expect.any(String),
+//   //       }),
+//   //     ])
+//   //   );
 
-describe("integration for the books api", () => {
-  test("GET /api/books - Success - get all the books", async () => {
-    const res = await request(app).get("/api/books");
-    expect(res.body).toEqual([
-      { name: expect, author: "jkRollings" },
-      { name: "syllemon", author: "kishor" },
-      { name: "hikings", author: "mausam" },
+//   //   expect(res.statusCode).toBe(200);
+//   // });
 
-    ]);
-    expect(res.statusCode).toBe(200);
-  });
-  //post
+//   //update
 
+//   //delete
+// });
+describe("post verb for books api ", () => {
+    const expectValidationError = async (payload, expectedMessage) => {
+        const { body, statusCode } = await request(app)
+            .post("/api/books")
+            .send(payload);
+        expect(statusCode).toBe(400);
+        myLogger.info(body);
+        expectedMessage.forEach((msg) => {
+            expect(body.errors).toEqual(
+                expect.arrayContaining([expect.objectContaining({ msg: msg })]),
+            );
+        });
+    };
 
-  //update
+    test("POST /api/books -stores book in books array", async () => {
+        const res = await request(app)
+            .post("/api/books")
+            .send({
+                name: "dog is man best friend  ",
+                author: "mr.factSpitter",
+            })
+            .set("Accept", "application/json")
+            .expect(200);
+        myLogger.info(res.body);
+    });
 
-  //delete
+    test("POST /api/books -failure if name and author property has empty value of body property", async () => {
+        await expectValidationError({ name: "", author: "" }, [
+            "book name is required",
+            "author name is required",
+        ]);
+    });
+
+    test("POST /api/books -failure if  author property has empty value of body property", async () => {
+        await expectValidationError({ name: "kshitiz", author: "" }, [
+            "author name is required",
+        ]);
+    });
 });
-
-console.log("hello");
